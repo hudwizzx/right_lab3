@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<script>
+
+// Функция counter(n)
+function counter(n) {
+    let intervalId = setInterval(function() {
+        console.log(n);
+        n--;
+        if (n < 0) {
+            clearInterval(intervalId);
+        }
+    }, 1000);
+}
+
+// Функция createCounter(n)
+function createCounter(n) {
+    return {
+        start() {
+            this.intervalId = setInterval(function() {
+                console.log(n);
+                n--;
+                if (n < 0) {
+                    clearInterval(this.intervalId);
+                }
+            }, 1000);
+        },
+        pause() {
+            clearInterval(this.intervalId);
+        },
+        stop() {
+            clearInterval(this.intervalId);
+            n = 0;
+        }
+    };
+}
+
+// Пример использования
+let myCounter = createCounter(5);
+myCounter.start();
+setTimeout(() => myCounter.pause(), 3000);
+setTimeout(() => myCounter.start(), 6000);
+setTimeout(() => myCounter.stop(), 9000);
+
+</script>
+
+</head>
+</html>
